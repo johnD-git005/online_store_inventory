@@ -155,10 +155,15 @@ def most_expensive_product(store_dict):
 def total_potential_sales(store_dict):
 	total_value = 0
 	for sales in store_dict:
-		total_price = store_dict[sales]["price"]
-		total_value += total_price
-		print(f"REMAINING STOCK FOR: {sales}:{store_dict[sales]}")
+		if store_dict[sales]["quantity"] <= 0:
+			continue
+
+		else:
+			total_price = store_dict[sales]["price"]
+			total_value += total_price
+			print(f"REMAINING STOCK FOR: {sales}:{store_dict[sales]}")
 	print(f"\n TOTAL VALUE OF REMAINING STOCK: {total_value}")
+	
 
 # FUNCTION TO TERMINATE PROGRAM
 def terminate_program():
