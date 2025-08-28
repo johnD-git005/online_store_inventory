@@ -47,6 +47,9 @@ def call_function(user_choice):
 	elif user_choice == 5:
 		most_expensive_product(store)
 
+	elif user_choice == 6:
+		total_potential_sales(store)	
+
 	elif user_choice == 7:
 		terminate_program()
 	
@@ -149,8 +152,13 @@ def most_expensive_product(store_dict):
 		
 
 # FUNCTION TO DISPLAY TOTAL POTENTIAL SALES
-def total_potential_sales():
-	pass
+def total_potential_sales(store_dict):
+	total_value = 0
+	for sales in store_dict:
+		total_price = store_dict[sales]["price"]
+		total_value += total_price
+		print(f"REMAINING STOCK FOR: {sales}:{store_dict[sales]}")
+	print(f"\n TOTAL VALUE OF REMAINING STOCK: {total_value}")
 
 # FUNCTION TO TERMINATE PROGRAM
 def terminate_program():
