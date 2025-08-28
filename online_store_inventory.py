@@ -11,8 +11,10 @@ def start():
 		1. ADD PRODUCTS
 		2. UPDATE STOCK
 		3. SELL A PRODUCT
-		4. DISPLA INVENTORY
-		5. TERMINATE PROGRAM
+		4. DISPLAY INVENTORY
+		5. MOST EXPENSIVE PRODUCT
+		6. TOTAL POTENTIAL SALES
+		7. TERMINATE PROGRAM
 		""")
 
 		option = int(input("\n Select Option: "))
@@ -43,6 +45,9 @@ def call_function(user_choice):
 		display_inventory(store)
 
 	elif user_choice == 5:
+		most_expensive_product(store)
+
+	elif user_choice == 7:
 		terminate_program()
 	
 	else:
@@ -123,6 +128,29 @@ def display_inventory(store_dict):
 		price = store_dict[items]["price"]
 		quantity = store_dict[items]["quantity"]
 		print(f"\n Product Name: {items}, Price: {price}, Quantity: {quantity}")
+	print(f"\n TOTAL NUMBER OF PRODUCTS DISPLAY: {len(store_dict)}")
+
+
+# FUNCTION TO DISPLAY MOST EXPENSIVE PRODUCT
+def most_expensive_product(store_dict):
+	expensive = []
+	for items in store_dict:
+		expensive.append(store_dict[items]["price"])
+
+	most_expensive = expensive[0]
+	for costly_items in expensive:
+		if costly_items > most_expensive:
+			most_expensive = costly_items
+
+	for product in store_dict:		
+		product_price = store_dict[product]["price"]
+		if most_expensive == product_price:
+			print(f"\n MOST EXPENSIVE PRODUCT {product}:{store_dict[product]}")
+		
+
+# FUNCTION TO DISPLAY TOTAL POTENTIAL SALES
+def total_potential_sales():
+	pass
 
 # FUNCTION TO TERMINATE PROGRAM
 def terminate_program():
