@@ -10,6 +10,7 @@ def start():
 		print("""
 		1. ADD PRODUCTS
 		2. UPDATE STOCK
+		3. SELL A PRODUCT
 		""")
 
 		option = int(input("\n Select Option: "))
@@ -27,8 +28,16 @@ def call_function(user_choice):
 
 	elif user_choice == 2:
 		print("\n UPDATE STOCK")
-		update = input("\n Enter Product Name: ").capitalize()
+		update = input("\n Enter Product Name: ").capitalize().strip()
 		update_stock(update)
+
+	elif user_choice == 3:
+		print("\n Sell A Product")
+		product_name = input("\n Enter Product Name: ").capitalize().strip()
+		sell_a_product(product_name)
+	
+	else:
+		print("\n Invalid Choice")
 
 # FUNCTION TO ADD PRODUCTS
 def add_products(name, price, quantity):
@@ -72,6 +81,32 @@ def update_stock(product):
 			print("\n Invalid Selection")
 	else:
 		print("\n Product not Found!")
-	
+
+# FUNCTION TO SELL A PRODUCT	
+def sell_a_product(product):
+	if product not in store:
+		print("\n Product Is Out of Stock!")
+
+	else:
+		print(f"\n {product}:{store[product]}")
+		quantity = int(input("\n Quntity of Product to Sell: "))
+
+		if quantity > store[product]["quantity"]:
+			print("\n Not Enough Quantity. Stock is Insufficient!")
+		
+		elif quantity < 0 or quantity == 0:
+			print("\n Please Input a Valid Number for Quantity")
+
+		else:
+			old_quantity = store[product]["quantity"]
+			old_quantity -= quantity
+			store[product].update({"quantity": old_quantity})
+			print(f"\n Product Name: {product}, Quantity Sold: {quantity}")
+			print(f"\n {product}:{store[product]}")
+			print(f"\n SUMMARY OF TOTAL SALES")
+			price = store[product]["price"]
+			price *= quantity
+			print(f"\n Number of Product Sold: {quantity}, Total Price: {price}")
+			
 
 start()
