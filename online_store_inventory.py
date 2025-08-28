@@ -11,6 +11,8 @@ def start():
 		1. ADD PRODUCTS
 		2. UPDATE STOCK
 		3. SELL A PRODUCT
+		4. DISPLA INVENTORY
+		5. TERMINATE PROGRAM
 		""")
 
 		option = int(input("\n Select Option: "))
@@ -35,6 +37,13 @@ def call_function(user_choice):
 		print("\n Sell A Product")
 		product_name = input("\n Enter Product Name: ").capitalize().strip()
 		sell_a_product(product_name)
+
+	elif user_choice == 4:
+		print("\n DISPLAY INVENTORY")
+		display_inventory(store)
+
+	elif user_choice == 5:
+		terminate_program()
 	
 	else:
 		print("\n Invalid Choice")
@@ -108,5 +117,16 @@ def sell_a_product(product):
 			price *= quantity
 			print(f"\n Number of Product Sold: {quantity}, Total Price: {price}")
 			
+# FUNCTION TO DISPLAY INVENTORY
+def display_inventory(store_dict):
+	for items in store_dict:
+		price = store_dict[items]["price"]
+		quantity = store_dict[items]["quantity"]
+		print(f"\n Product Name: {items}, Price: {price}, Quantity: {quantity}")
+
+# FUNCTION TO TERMINATE PROGRAM
+def terminate_program():
+	print("\n Terminating Program. Goodbye!")
+	exit()
 
 start()
