@@ -1,0 +1,77 @@
+store = {
+	"Laptop": {"price": 1200, "quantity": 5},
+	"Headphones": {"price": 150, "quantity": 10},
+	"Mouse": {"price": 40, "quantity": 40}
+	}
+
+# START FUNCTION
+def start():
+	while True:
+		print("""
+		1. ADD PRODUCTS
+		2. UPDATE STOCK
+		""")
+
+		option = int(input("\n Select Option: "))
+		call_function(option)
+
+# FUNCTION TO CALL IF, ELIF AND ELSE STATEMENT
+def call_function(user_choice):
+	if user_choice == 1:
+		print("\n ADD NEW PRODUCT")
+		name = input("\n Enter Product Name: ").capitalize().strip()
+		price = int(input("\n Enter Product Price: "))
+		quantity = int(input("\n Enter Product Quantity: "))
+		add_products(name, price, quantity)
+		print(f"\n {store}")
+
+	elif user_choice == 2:
+		print("\n UPDATE STOCK")
+		update = input("\n Enter Product Name: ").capitalize()
+		update_stock(update)
+
+# FUNCTION TO ADD PRODUCTS
+def add_products(name, price, quantity):
+	if name in store:
+		print(f"\n Product: {name} already exists in the store")
+		print(f"\n {name}:{store[name]}")
+	else:
+		store[name] = {
+			"price": price,
+			"quantity": quantity
+			}
+		print(f"\n New Product Added Successfully!")
+		print(f"\n Product Name:{name}, Price:{price}, Quantity:{quantity}")
+
+# FUNCTION TO UPDATE STOCK
+def update_stock(product):
+	if product in store:
+		print(f"\n {product}:{store[product]}")
+		print("""
+		1. UPDATE PRICE
+		2. UPDATE QUANTITY
+		""")
+		
+		option = int(input("\n Select an Option to continue: "))		
+		if option == 1:
+			print("\n UPDATE PRICE")
+			new_price = int(input("\n Enter New Price: "))
+			store[product].update({"price":new_price})
+			print(f"\n {product} Price successfully updated")
+			print(f"\n {product}:{store[product]}")
+
+		elif option == 2:
+			print("\n UPDATE QUANTITY")
+			new_quantity = int(input("\n Enter New Quantity: "))
+			old_quantity = store[product]["quantity"]
+			old_quantity += new_quantity
+			store[product].update({"quantity": old_quantity})
+			print(f"\n {product} Quantity successfully updated")
+			print(f"\n {product}:{store[product]}")
+		else:
+			print("\n Invalid Selection")
+	else:
+		print("\n Product not Found!")
+	
+
+start()
